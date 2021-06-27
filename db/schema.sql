@@ -19,3 +19,13 @@ create table car_company (
                         id serial primary key,
                         name varchar(2000)
 );
+
+create table books (
+                     id serial primary key,
+                     name varchar(2000) not null
+);
+
+create table authors (
+                             id serial primary key,
+                             name varchar(2000) not null
+);

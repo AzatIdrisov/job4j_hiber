@@ -19,9 +19,9 @@
 
         <mapping class="ru.job4j.many.Role" />
         <mapping class="ru.job4j.many.User" />
-        <mapping class="ru.job4j.many.CarModel" />
-        <mapping class="ru.job4j.many.CarCompany" />
         <mapping class="ru.job4j.manytomany.Book" />
         <mapping class="ru.job4j.manytomany.Author" />
+        <mapping class="ru.job4j.lazy.CarModel" />
+        <mapping class="ru.job4j.lazy.CarMark" />
     </session-factory>
 </hibernate-configuration>

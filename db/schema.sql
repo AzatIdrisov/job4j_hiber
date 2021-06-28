@@ -29,3 +29,14 @@ create table authors (
                              id serial primary key,
                              name varchar(2000) not null
 );
+
+create table car_models (
+                     id serial primary key,
+                     name varchar(2000),
+                     car_mark_id int not null references car_marks(id)
+);
+
+create table car_marks (
+                             id serial primary key,
+                             name varchar(2000)
+);

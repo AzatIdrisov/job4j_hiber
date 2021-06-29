@@ -30,6 +30,11 @@ create table authors (
                              name varchar(2000) not null
 );
 
+create table authors_books (
+                            author_id int not null references authors(id),
+                            books_id int not null references books(id)
+);
+
 create table car_models (
                      id serial primary key,
                      name varchar(2000),

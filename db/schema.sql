@@ -64,3 +64,10 @@ create table history_owner (
                                driver_id int not null references driver(id),
                                car_id int not null references car(id)
 );
+
+create table candidates (
+                            id         serial primary key,
+                            name       text,
+                            experience int,
+                            salary     int
+);

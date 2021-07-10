@@ -15,18 +15,24 @@ public class HbmRun {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sf.openSession();
             session.beginTransaction();
-/*
 
-            Candidate one = Candidate.of("Alex", 1, 1000);
-            Candidate two = Candidate.of("Nikolay", 2, 2000);
-            Candidate three = Candidate.of("Nikita", 3, 3000);
+/*
+            VacancyStore store = VacancyStore.of("Store");
+            session.save(store);
+
+            Candidate one = Candidate.of("Alex", 1, 1000, store);
+            Candidate two = Candidate.of("Nikolay", 2, 2000, store);
+            Candidate three = Candidate.of("Nikita", 3, 3000, store);
 
             session.save(one);
             session.save(two);
             session.save(three);
+
+            store.addVacancy(Vacancy.of("Java Junior"));
+            store.addVacancy(Vacancy.of("Java Middle"));
 */
             findAll(session);
-            findById(session, 1);
+            findById(session, 5);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
@@ -44,7 +50,11 @@ public class HbmRun {
     }
 
     public static void findById(Session session, int id) {
-        Query query = session.createQuery("from Candidate c where c.id = :fId");
+        Query query = session.createQuery(
+                "select distinct cn from Candidate cn "
+                        + "join fetch cn.store vs "
+                        + "join fetch vs.vacancies v "
+                        + "where cn.id = :fId", Candidate.class);
         query.setParameter("fId", id);
         System.out.println(query.uniqueResult());
     }

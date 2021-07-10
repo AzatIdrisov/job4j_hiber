@@ -14,11 +14,15 @@ public class Candidate {
     private int experience;
     private int salary;
 
-    public static Candidate of(String name, int experience, int salary) {
+    @OneToOne(fetch = FetchType.LAZY)
+    private VacancyStore store;
+
+    public static Candidate of(String name, int experience, int salary, VacancyStore store) {
         Candidate candidate = new Candidate();
         candidate.name = name;
         candidate.experience = experience;
         candidate.salary = salary;
+        candidate.store = store;
         return candidate;
     }
 
@@ -52,6 +56,14 @@ public class Candidate {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public VacancyStore getStore() {
+        return store;
+    }
+
+    public void setStore(VacancyStore store) {
+        this.store = store;
     }
 
     @Override
